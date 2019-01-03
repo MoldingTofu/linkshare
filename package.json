@@ -19,7 +19,8 @@
   "homepage": "https://github.com/MoldingTofu/linkshare#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "sqlite3": "^4.0.4"
   },
   "devDependencies": {}
 }
