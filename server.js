@@ -27,6 +27,40 @@ router.route('/').get(function(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+router.route('/:link?').get(function(req, res) {
+  var link = req.params.link;
+  var query = 'SELECT link FROM links WHERE id=?;';
+  var values = ''; //function that changes link parameter into integer
+
+  db.all(query, values, function(err, url) {
+    if (err) {
+      console.log(err);
+      res.send('link cannot be obtained');
+    }
+    else {
+      console.log('got link: ${url}');
+      res.json(url);
+      //redirect?
+    }
+  });
+})
+.post(function(req, res) {
+  var url = req.body.url;
+  var id = ''; //encode url into short url
+  var query = 'INSERT INTO links(id, link) VALUES(?,?)';
+  var values = [id, url];
+
+  db.run(query, values, function(err) {
+    if (err) {
+      console.log(err);
+      res.send('invalid POST');
+    }
+    else {
+      res.json({ message: 'shortlink created' });
+    }
+  });
+});
+
 app.use('/', router);
 server = app.listen(port);
 console.log('Express server listening on port %d in %s mode.', port, app.settings.env);
