@@ -1,7 +1,7 @@
 {
   "name": "linkshare",
   "version": "1.0.0",
-  "description": "",
+  "description": "Website that shortens links. Can also be used to transfer links from different devices.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,8 +19,7 @@
   "homepage": "https://github.com/MoldingTofu/linkshare#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "sqlite3": "^4.0.2"
+    "express": "^4.16.3"
   },
   "devDependencies": {}
 }
