@@ -19,12 +19,12 @@ var db = new sqlite3.Database('./links.db', sqlite3.OPEN_READWRITE | sqlite3.OPE
 
 db.run("CREATE TABLE IF NOT EXISTS links(" +
     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-    "link varchar(500) NOT NULL);",
+    "link varchar(500) NOT NULL" +
+    ");",
     function(err) {
       if (err)
         throw err;
-
-      console.log("Created links list if it didn't exist already")
+      console.log("Created list of links if it didn't exist already")
     });
 
 //var query = "INSERT INTO links(link) VALUES (\"https://github.com/MoldingTofu\");"
