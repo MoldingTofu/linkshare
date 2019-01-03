@@ -27,7 +27,7 @@ router.route('/').get(function(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-router.route('/:link?').get(function(req, res) {
+router.route('/link/:link?').get(function(req, res) {
   var link = req.params.link;
   var query = 'SELECT link FROM links WHERE id=?;';
   var values = ''; //function that changes link parameter into integer
@@ -38,7 +38,7 @@ router.route('/:link?').get(function(req, res) {
       res.send('link cannot be obtained');
     }
     else {
-      console.log('got link: ${url}');
+      console.log('got link: %s', url);
       res.json(url);
       //redirect?
     }

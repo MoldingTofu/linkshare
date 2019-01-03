@@ -27,10 +27,4 @@ db.run("CREATE TABLE IF NOT EXISTS links(" +
       console.log("Created list of links if it didn't exist already")
     });
 
-//var query = "INSERT INTO links(link) VALUES (\"https://github.com/MoldingTofu\");"
-
-//non scrubed querys
-//var get = "SELECT link FROM links WHERE id = x";
-//var create = "INSERT INTO links(link) VALUES (\"x\")";
-
 module.exports = db;
