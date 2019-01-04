@@ -6,13 +6,10 @@ var app = express();
 var db = require('./database.js');
 var shortener = require('./src/shortener.js');
 
-var connection = sqlite3.connect(':memory:');
-var cursor = connection.cursor();
-
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
-app.use(function(req, res, next) { // request, response, next
+app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, cache-control');
@@ -28,13 +25,13 @@ router.use(function(req, res, next) {
 });
 
 router.route('/').get(function(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 router.route('/link/:link?').get(function(req, res) {
   var link = req.params.link;
   var query = 'SELECT link FROM links WHERE id=?;';
-  var values = shortener.decode(link); //function that changes link parameter into integer
+  var values = shortener.decode(link);
 
   db.all(query, values, function(err, url) {
     if (err) {
@@ -59,7 +56,7 @@ router.route('/link/:link?').get(function(req, res) {
       res.send('invalid POST');
     }
     else {
-      res.json({ message: shortener.encode(cursor.lastrowid)  });
+      res.json({ message: shortener.encode(sqlite.last_insert_rowid()) });
     }
   });
 });

@@ -1,7 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
 
 //Open database, or create if it doesn't exist
-var db = new sqlite3.Database('/database/links.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
+var db = new sqlite3.Database('./links.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
   if (err) {
     return console.error(err.message);
   }
