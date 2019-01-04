@@ -1,14 +1,20 @@
 $(document).ready(function() {
-
-  $('#create').click(createShort);
-
+  $('#create').click(function() {
+    if ($('#url').val() === '') {
+      console.log("clicked with nothing");
+    }
+    else {
+      createShort();
+    }
+  });
 });
+
 
 function createShort() {
   var url = $('#url').val();
 
-  if (url === '') {
-
+  if (url === "") {
+    console.log("link empty");
   }
   else {
     $.ajax({
