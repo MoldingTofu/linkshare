@@ -56,9 +56,9 @@ router.route('/:link?').get(function(req, res) {
       res.send('invalid POST');
     }
     else {
-      res.json({ message: shortener.encode(sqlite.last_insert_rowid()) });
+      res.json({ message: 'success' }) 
     }
-  });
+  })
 });
 
 app.use('/', router);
