@@ -5,7 +5,41 @@
     <link rel="stylesheet" src="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.0/sjcl.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#create').click(function() {
+            if ($('#url').val() === '') {
+              alert("clicked with nothing");
+            }
+            else {
+              createShort();
+            }
+          });
+        });
+        
+        
+        function createShort() {
+          var url = $('#url').val();
+        
+          if (url === "") {
+            alert("link empty");
+          }
+          else {
+            $.ajax({
+              "method": "POST",
+              "crossDomain": true,
+              "url": "http://localhost:8080/",
+              "data": {
+                "url": url
+              },
+              "success": alert('success'),
+              "error": function (err) {
+                alert(err);
+              }
+            });
+          }
+        }
+    </script>
   </head>
 
   <title>shortlink</title>

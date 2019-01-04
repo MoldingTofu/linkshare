@@ -28,10 +28,10 @@ router.route('/').get(function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-router.route('/link/:link?').get(function(req, res) {
+router.route('/:link?').get(function(req, res) {
   var link = req.params.link;
   var query = 'SELECT link FROM links WHERE id=?;';
-  var values = shortener.shorten.decode(link);
+  var values = shortener.decode(link);
 
   db.all(query, values, function(err, url) {
     if (err) {
@@ -56,7 +56,7 @@ router.route('/link/:link?').get(function(req, res) {
       res.send('invalid POST');
     }
     else {
-      res.json({ message: shortener.shorten.encode(sqlite.last_insert_rowid()) });
+      res.json({ message: shortener.encode(sqlite.last_insert_rowid()) });
     }
   });
 });
