@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('#create').click(function() {
     if ($('#url').val() === '') {
-      console.log("clicked with nothing");
+      alert("clicked with nothing");
     }
     else {
       createShort();
@@ -14,7 +14,7 @@ function createShort() {
   var url = $('#url').val();
 
   if (url === "") {
-    console.log("link empty");
+    alert("link empty");
   }
   else {
     $.ajax({
@@ -24,9 +24,9 @@ function createShort() {
       "data": {
         "url": url
       },
-      "success": console.log('success'),
+      "success": alert('success'),
       "error": function (err) {
-        console.log(error);
+        alert(error);
       }
     });
   }
