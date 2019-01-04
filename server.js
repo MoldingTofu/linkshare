@@ -4,6 +4,10 @@ var bodyparser = require('body-parser');
 var app = express();
 
 var db = require('./database.js');
+var shortener = require('./src/shortener.js');
+
+var connection = sqlite3.connect(':memory:');
+var cursor = connection.cursor();
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
@@ -30,7 +34,7 @@ router.route('/').get(function(req, res) {
 router.route('/link/:link?').get(function(req, res) {
   var link = req.params.link;
   var query = 'SELECT link FROM links WHERE id=?;';
-  var values = ''; //function that changes link parameter into integer
+  var values = shortener.decode(link); //function that changes link parameter into integer
 
   db.all(query, values, function(err, url) {
     if (err) {
@@ -46,9 +50,8 @@ router.route('/link/:link?').get(function(req, res) {
 })
 .post(function(req, res) {
   var url = req.body.url;
-  var id = ''; //encode url into short url
-  var query = 'INSERT INTO links(id, link) VALUES(?,?)';
-  var values = [id, url];
+  var query = 'INSERT INTO links(link) VALUES(?)';
+  var values = url;
 
   db.run(query, values, function(err) {
     if (err) {
@@ -56,7 +59,7 @@ router.route('/link/:link?').get(function(req, res) {
       res.send('invalid POST');
     }
     else {
-      res.json({ message: 'shortlink created' });
+      res.json({ message: shortener.encode(cursor.lastrowid)  });
     }
   });
 });
