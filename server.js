@@ -56,7 +56,16 @@ router.route('/:link?').get(function(req, res) {
       res.send('invalid POST');
     }
     else {
-      res.json({ message: 'success' }) 
+      db.all('select id from links where link=(?);', values, function(err, id) {
+        if (err) {
+          console.log(err);
+          res.send('invalid POST');
+      }
+      else {
+        console.log('shortened link to: %s', shortener.encode(id));
+        res.json(shortener.encode(id));
+      }
+    });
     }
   })
 });

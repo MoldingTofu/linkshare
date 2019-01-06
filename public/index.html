@@ -17,28 +17,27 @@
           });
         });
         
-        
-        function createShort() {
-          var url = $('#url').val();
-        
-          if (url === "") {
-            alert("link empty");
-          }
-          else {
-            $.ajax({
-              "method": "POST",
-              "crossDomain": true,
-              "url": "http://localhost:8080/",
-              "data": {
-                "url": url
-              },
-              "success": alert('success'),
-              "error": function (err) {
-                alert(err);
-              }
-            });
-          }
+      function createShort() {
+        var url = $('#url').val();
+      
+        if (url === "") {
+          alert("link empty");
         }
+        else {
+          $.ajax({
+            "method": "POST",
+            "crossDomain": true,
+            "url": "http://localhost:8080/",
+            "data": {
+              "url": url
+            },
+            "success": alert('success'),
+            "error": function (err) {
+              alert(err);
+            }
+          });
+        }
+      }
     </script>
   </head>
 
