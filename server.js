@@ -62,7 +62,7 @@ router.route('/:link?').get(function(req, res) {
           res.send('invalid POST');
       }
       else {
-        console.log('shortened link to: %s', shortener.encode(id));
+        console.log(shortener.encode(id));
         res.json(shortener.encode(id));
       }
     });
